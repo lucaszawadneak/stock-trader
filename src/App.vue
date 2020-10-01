@@ -17,4 +17,16 @@ export default {
 * {
   font-family: 'Roboto', sans-serif;
 }
+.page > div {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 </style>
