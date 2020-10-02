@@ -45,6 +45,9 @@ export default new Vuex.Store({
     newPrice(state, { index, price }) {
       state.stocks[index].price += price;
     },
+    setNewData(state, payload) {
+      state.stocks = payload;
+    },
   },
   actions: {
     buyStock(context, payload) {
@@ -78,6 +81,20 @@ export default new Vuex.Store({
 
         context.commit('newPrice', { price: stockPrice, index });
       });
+    },
+    async getData(context) {
+      const response = await Vue.prototype.$http.get('data.json');
+      if (response.data) {
+        context.commit('setNewData', response.data.stocks);
+      }
+
+      return response;
+    },
+    async setData() {
+      const response = await Vue.prototype.$http.put('data.json', this.state);
+
+      console.log(response);
+      return response;
     },
   },
 });

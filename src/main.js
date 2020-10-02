@@ -6,6 +6,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+import './plugins/api';
+
 Vue.config.productionTip = false;
 
 Vue.filter('money', (value) => {

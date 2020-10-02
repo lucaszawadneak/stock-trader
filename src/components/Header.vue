@@ -22,8 +22,8 @@
             SAVE / LOAD
           </button>
         </template>
-        <b-dropdown-item href="#">Save</b-dropdown-item>
-        <b-dropdown-item href="#">Load</b-dropdown-item>
+        <b-dropdown-item href="#" @click="set">Save</b-dropdown-item>
+        <b-dropdown-item href="#" @click="get">Load</b-dropdown-item>
       </b-dropdown>
       <span>BALANCE: {{ balance | money }}</span>
     </div>
@@ -35,9 +35,15 @@ import { mapActions } from 'vuex';
 
 export default {
   methods: {
-    ...mapActions(['endDay']),
+    ...mapActions(['endDay', 'getData', 'setData']),
     navigateHome() {
       this.$router.push('/');
+    },
+    get() {
+      this.getData();
+    },
+    set() {
+      this.setData();
     },
   },
   computed: {
