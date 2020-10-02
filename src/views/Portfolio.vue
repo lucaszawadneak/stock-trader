@@ -1,11 +1,12 @@
 <template>
   <div class="page">
-    <div>
-      <card header="BMW (5) - R$10,00" buttonLabel="Sell" />
-      <card header="Google (5) - R$10,00" buttonLabel="Sell" />
-      <card header="Apple (5) - R$10,00" buttonLabel="Sell" />
-      <card header="Twitter (5) - R$10,00" buttonLabel="Sell" />
-    </div>
+    <transition-group enter-active-class="animated bounce" leave-active-class="animated shake">
+      <card header="BMW (5) - R$10,00" buttonLabel="Sell" key="0" />
+      <card header="Google (5) - R$10,00" buttonLabel="Sell" key="1" />
+      <card header="Apple (5) - R$10,00" buttonLabel="Sell" key="2" />
+      <card header="Twitter (5) - R$10,00" buttonLabel="Sell" key="3" />
+    </transition-group>
+    <button @click="visible = !visible">switch</button>
   </div>
 </template>
 
@@ -14,6 +15,11 @@ import Card from '../components/Card.vue';
 
 export default {
   components: { Card },
+  data() {
+    return {
+      visible: false,
+    };
+  },
 };
 </script>
 

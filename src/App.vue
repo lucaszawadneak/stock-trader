@@ -1,7 +1,9 @@
 <template>
-  <div class="app">
+  <div id="app">
     <Header />
-    <router-view />
+    <transition mode="out-in" name="fade">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -14,11 +16,17 @@ export default {
 </script>
 
 <style>
-* {
+#app {
+  overflow: hidden;
+}
+button,
+span,
+h1 {
   font-family: 'Roboto', sans-serif;
 }
+
 .page > div {
-  margin-top: 20px;
+  margin-top: 40px;
   width: 100%;
   max-width: 1200px;
 }
@@ -28,5 +36,36 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding: 0px 20px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(80px);
+    opacity: 0;
+  }
+}
+
+.fade-enter-active {
+  animation: slideIn 500ms ease;
+}
+
+.fade-leave-active {
+  animation: slideOut 500ms ease;
 }
 </style>

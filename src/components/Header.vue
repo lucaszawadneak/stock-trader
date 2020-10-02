@@ -16,10 +16,16 @@
       <button>
         END DAY
       </button>
-      <button>
-        SAVE / LOAD
-      </button>
-      <span>SALDO: R$10.000,00</span>
+      <b-dropdown variant="link" toggle-class="text-decoration-none" no-caret>
+        <template v-slot:button-content>
+          <button>
+            SAVE / LOAD
+          </button>
+        </template>
+        <b-dropdown-item href="#">Save</b-dropdown-item>
+        <b-dropdown-item href="#">Load</b-dropdown-item>
+      </b-dropdown>
+      <span>BALANCE: R$10.000,00</span>
     </div>
   </div>
 </template>
@@ -43,6 +49,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0px 10px;
+  z-index: 1;
 }
 
 .nav {
