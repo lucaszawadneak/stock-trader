@@ -1,27 +1,30 @@
 <template>
   <b-card
-    :header="header"
+    :header="`${header} - ${money}`"
     header-text-variant="white"
     header-bg-variant="dark"
     bg-variant="light"
     style="max-width: 30rem; width: 100%"
     class="m-2"
   >
-    <span>Ammount</span>
+    <span>Amount</span>
     <div class="form">
-      <b-form-input id="input-default" v-model.number="ammount"></b-form-input>
-      <b-button variant="primary" class="ml-2">{{ buttonLabel }}</b-button>
+      <b-form-input id="input-default" @input="handleChange"></b-form-input>
+      <b-button variant="primary" class="ml-2" @click="handleClick">{{ buttonLabel }}</b-button>
     </div>
   </b-card>
 </template>
 
 <script>
 export default {
-  props: ['buttonLabel', 'header'],
-  data() {
-    return {
-      ammount: 0,
-    };
+  props: ['buttonLabel', 'header', 'money', 'value', 'id'],
+  methods: {
+    handleChange(value) {
+      this.$emit('input', value);
+    },
+    handleClick() {
+      this.$emit('click', this.$props.id);
+    },
   },
 };
 </script>

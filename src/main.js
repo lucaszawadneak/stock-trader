@@ -8,6 +8,15 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
+Vue.filter('money', (value) => {
+  const formatter = Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
+  return formatter.format(value);
+});
+
 new Vue({
   router,
   store,

@@ -13,7 +13,7 @@
       </button>
     </div>
     <div class="actions">
-      <button>
+      <button @click="endDay">
         END DAY
       </button>
       <b-dropdown variant="link" toggle-class="text-decoration-none" no-caret>
@@ -25,16 +25,24 @@
         <b-dropdown-item href="#">Save</b-dropdown-item>
         <b-dropdown-item href="#">Load</b-dropdown-item>
       </b-dropdown>
-      <span>BALANCE: R$10.000,00</span>
+      <span>BALANCE: {{ balance | money }}</span>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   methods: {
+    ...mapActions(['endDay']),
     navigateHome() {
       this.$router.push('/');
+    },
+  },
+  computed: {
+    balance() {
+      return this.$store.state.balance;
     },
   },
 };

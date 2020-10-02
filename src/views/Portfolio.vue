@@ -1,24 +1,42 @@
 <template>
   <div class="page">
-    <transition-group enter-active-class="animated bounce" leave-active-class="animated shake">
-      <card header="BMW (5) - R$10,00" buttonLabel="Sell" key="0" />
-      <card header="Google (5) - R$10,00" buttonLabel="Sell" key="1" />
-      <card header="Apple (5) - R$10,00" buttonLabel="Sell" key="2" />
-      <card header="Twitter (5) - R$10,00" buttonLabel="Sell" key="3" />
-    </transition-group>
-    <button @click="visible = !visible">switch</button>
+    <div>
+      <card
+        :header="`${item.name} (${item.owned})`"
+        :money="item.price | money"
+        buttonLabel="Sell"
+        v-for="item in stocks"
+        :key="item.name"
+        :id="item.name"
+        v-model.number="amount"
+        @click="handleSubmit"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Card from '../components/Card.vue';
 
 export default {
   components: { Card },
   data() {
     return {
-      visible: false,
+      amount: 0,
     };
+  },
+  methods: {
+    ...mapActions(['sellStock']),
+    handleSubmit(id) {
+      this.sellStock({ id, amount: this.amount });
+      this.amount = 0;
+    },
+  },
+  computed: {
+    stocks() {
+      return this.$store.state.stocks;
+    },
   },
 };
 </script>
