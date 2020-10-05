@@ -30,12 +30,23 @@ export default {
     ...mapActions(['sellStock']),
     handleSubmit(id) {
       if (this.amount > 0) {
+        const stockIndex = this.stocks.findIndex((item) => item.name === id);
+
+        if (stockIndex >= 0) {
+          if (this.stocks[stockIndex].owned < this.amount) {
+            this.$toasted.show('You need more stocks to sell this amount!', { duration: 4000 });
+            this.amount = 0;
+            return 0;
+          }
+        }
+
         this.sellStock({ id, amount: this.amount });
         this.amount = 0;
       } else {
         this.$toasted.show('Stocks value must be higher than 0', { duration: 4000 });
         this.amount = 0;
       }
+      return 0;
     },
   },
   computed: {
