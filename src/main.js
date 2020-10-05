@@ -7,6 +7,7 @@ import router from './router';
 import store from './store';
 
 import './plugins/api';
+import './plugins/toast';
 
 Vue.config.productionTip = false;
 

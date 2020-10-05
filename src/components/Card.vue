@@ -6,6 +6,7 @@
     bg-variant="light"
     style="max-width: 30rem; width: 100%"
     class="m-2"
+    @keydown="handleKeyDown"
   >
     <span>Amount</span>
     <div class="form">
@@ -24,6 +25,11 @@ export default {
     },
     handleClick() {
       this.$emit('click', this.$props.id);
+    },
+    handleKeyDown(e) {
+      if (e.keyCode === 13) {
+        this.handleClick();
+      }
     },
   },
 };

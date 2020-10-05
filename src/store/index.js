@@ -86,6 +86,11 @@ export default new Vuex.Store({
       const response = await Vue.prototype.$http.get('data.json');
       if (response.data) {
         context.commit('setNewData', response.data.stocks);
+        Vue.toasted.show('Data loaded successfully!', {
+          duration: 3000,
+          position: 'top-center',
+          theme: 'outline',
+        });
       }
 
       return response;
@@ -93,7 +98,14 @@ export default new Vuex.Store({
     async setData() {
       const response = await Vue.prototype.$http.put('data.json', this.state);
 
-      console.log(response);
+      if (response.status === 200) {
+        Vue.toasted.show('Changes stored successfully!', {
+          duration: 3000,
+          position: 'top-center',
+          theme: 'outline',
+        });
+      }
+
       return response;
     },
   },

@@ -30,7 +30,12 @@ export default {
   methods: {
     ...mapActions(['buyStock']),
     handleSubmit(id) {
-      this.buyStock({ id, amount: this.amount });
+      if (this.amount > 0) {
+        this.buyStock({ id, amount: this.amount });
+      } else {
+        this.$toasted.show('Stocks value must be higher than 0', { duration: 4000 });
+        this.amount = 0;
+      }
     },
   },
   computed: {
